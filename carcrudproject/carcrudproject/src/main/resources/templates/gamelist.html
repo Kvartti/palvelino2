@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Game List</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Games</h1>
+	<table>
+		<tr>
+			<th>Title</th>
+			<th>Year</th>
+			<th>Publisher</th>
+		</tr>
+
+		<tr th:each="game : ${games}">
+			<td th:text="${game.gametitle}">Title</td>
+			<td th:text="${game.gamepublisher}">Publisher</td>
+			<td th:text="${game.gameyear}">Year</td>
+		</tr>
+	</table>
+	<a href="/newcar">New Game</a>
+
+</body>
+</html>
