@@ -11,23 +11,20 @@ import palvelino.harjoitustyo.domain.Game;
 import palvelino.harjoitustyo.domain.GameRepository;
 
 @SpringBootApplication
-public class CarcrudprojectApplication {
+public class GameApplication {
 	
-	private static final Logger log = LoggerFactory.getLogger(CarcrudprojectApplication.class);  // uusi loggeriattribuutti
+	private static final Logger log = LoggerFactory.getLogger(GameApplication.class);
 
 	public static void main(String[] args) {
-		SpringApplication.run(CarcrudprojectApplication.class, args);
+		SpringApplication.run(GameApplication.class, args);
 	}
 	
-	
-	//  testidatan luonti H2-testitietokantaan aina sovelluksen käynnistyessä
 	@Bean
-	public CommandLineRunner carDemo(GameRepository grepository) { 
+	public CommandLineRunner gameDemo(GameRepository grepository) { 
 		return (args) -> {
-			log.info("save games");
 			grepository.save(new Game("Overwatch", 2016, "Blizzard"));
-			grepository.save(new Game("The Legend of Zelda: Breath of the Wild", 2017, "Nintendo"));
-		
+			grepository.save(new Game("Breath of the Wild", 2017, "Nintendo"));
+				
 			log.info("fetch games");
 			for (Game game : grepository.findAll()) {
 				log.info(game.toString());

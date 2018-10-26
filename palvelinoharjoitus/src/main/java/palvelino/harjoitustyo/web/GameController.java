@@ -14,11 +14,10 @@ import palvelino.harjoitustyo.domain.Game;
 import palvelino.harjoitustyo.domain.GameRepository;
 
 @Controller
-public class CarController {
+public class GameController {
 	
 	@Autowired
-	GameRepository grepository; 
-	
+	GameRepository grepository;
 	
 	// autolistaus
 	@RequestMapping(value = "/gamelist", method = RequestMethod.GET)
@@ -29,19 +28,37 @@ public class CarController {
 								// joka prosessoidaan palvelimella
 	}
 
-/*	// tyhjän autolomakkeen muodostaminen
-	@RequestMapping(value = "/newcar", method = RequestMethod.GET)
-	public String getNewCarForm(Model model) {
-		model.addAttribute("car", new Game()); // "tyhjä" auto-olio
-		return "carform";
+	@RequestMapping(value = "/newgame", method = RequestMethod.GET)
+	public String getGameForm(Model model) {
+		model.addAttribute("game", new Game()); // "tyhjä" auto-olio
+		return "gameform";
 	}
+	
+    @RequestMapping(value = "/gameform")
+    public String addGame(Model model){
+    	model.addAttribute("game", new Game());
+    	//model.addAttribute("categories", crepository.findAll());
+        return "gameform";
+    }     
+    
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    public String save(Game game){
+        grepository.save(game);
+        return "redirect:gamelist";
+    }  
+    
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    public String deleteGame(@PathVariable("id") Long gameid, Model model) {
+    	grepository.deleteById(gameid);
+        return "redirect:../gamelist";
+    }   
 
-	// autolomakkeella syötettyjen tietojen vastaanotto ja tallennus
-	@RequestMapping(value = "/newcar", method = RequestMethod.POST)
-	public String saveCar(@ModelAttribute Game car) {
+/*	// autolomakkeella syötettyjen tietojen vastaanotto ja tallennus
+	@RequestMapping(value = "/newgame", method = RequestMethod.POST)
+	public String saveGame(@ModelAttribute Game game) {
 		// talletetaan yhden auton tiedot tietokantaan
-		carRepository.save(car);
-		return "redirect:/cars";
+		grepository.save(game);
+		return "redirect:/gamelist";
 	}
 
 	// auton poisto

@@ -1,25 +1,33 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
+<link type="text/css" rel="stylesheet" href="css/style.css" th:href="@{css/style.css}" />
+
 <head>
 <title>Game List</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
 	<h1>Games</h1>
-	<table>
+	<div class="container">
+	<table class="responsive-table">
 		<tr>
-			<th>Title</th>
-			<th>Year</th>
-			<th>Publisher</th>
+			<th scope="col">Series</th>
+			<th scope="col">Title</th>
+			<th scope="col">Year</th>
+			<th scope="col">Publisher</th>
 		</tr>
 
 		<tr th:each="game : ${games}">
+			<td>series</td>
 			<td th:text="${game.gametitle}">Title</td>
 			<td th:text="${game.gamepublisher}">Publisher</td>
 			<td th:text="${game.gameyear}">Year</td>
+ 			<td><a th:href="@{/delete/{id}(id=${game.gameid})}">Delete</a></td> 
 		</tr>
 	</table>
-	<a href="/newcar">New Game</a>
-
+	<a href="/newgame">New Game</a><br/>
+	<a href="/newpublisher">New Publisher</a><br/>
+	<a href="/newseries">New Series</a>
+</div>
 </body>
 </html>
