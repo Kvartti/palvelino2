@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<link type="text/css" rel="stylesheet" href="css/style.css" th:href="@{css/style.css}" />
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 <head>
 <title>Game List</title>
@@ -8,18 +8,20 @@
 </head>
 <body>
 	<h1>Games</h1>
-	<div class="container">
-	<table class="responsive-table">
+	<div class="w3-container">
+	<table class="w3-table-all w3-card-4">
 		<tr>
-			<th scope="col">Series</th>
-			<th scope="col">Title</th>
-			<th scope="col">Year</th>
-			<th scope="col">Publisher</th>
-			<th scope="col">Console</th>
+			<th>Series</th>
+			<th>Title</th>
+			<th>Publisher</th>
+			<th>Year</th>
+			<th>Console</th>
+			<th></th>
+			<th></th>
 		</tr>
 
 		<tr th:each="game : ${games}">
-			<td>series</td>
+			<td th:text="${game.series.seriesname}">Series</td>
 			<td th:text="${game.gametitle}">Title</td>
 			<td th:text="${game.gamepublisher}">Publisher</td>
 			<td th:text="${game.gameyear}">Year</td>
@@ -28,6 +30,7 @@
  			<td><a th:href="@{/delete/{id}(id=${game.gameid})}">Delete</a></td> 
 		</tr>
 	</table>
+	<br/>
 	<a href="/newgame">New Game</a><br/>
 	<a href="/newseries">New Series</a><br/>
 	<a href="/newconsole">New Console</a><br/>

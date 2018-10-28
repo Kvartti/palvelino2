@@ -22,6 +22,11 @@ public class Game {
 	@JsonIgnore
 	@JoinColumn(name = "consoleid")
 	private Console console;
+	
+	@ManyToOne
+	@JsonIgnore
+	@JoinColumn(name = "seriesid")
+	private Series series;
 
 	public Game() {
 		super();
@@ -30,12 +35,13 @@ public class Game {
 		this.gamepublisher = null;
 	}
 
-	public Game(String gametitle, int gameyear, String gamepublisher, Console console) {
+	public Game(String gametitle, int gameyear, String gamepublisher, Console console, Series series) {
 		super();
 		this.gametitle = gametitle;
 		this.gameyear = gameyear;
 		this.gamepublisher = gamepublisher;
 		this.console = console;
+		this.series = series;
 	}
 
 	public long getGameid() {
@@ -73,9 +79,22 @@ public class Game {
 		this.console = console;
 	}
 
+	public Series getSeries() {
+		return series;
+	}
+
+	public void setSeries(Series series) {
+		this.series = series;
+	}
 
 	@Override
 	public String toString() {
+		if (this.console != null & this.series != null)
+			return "Game [gameid=" + gameid + ", gametitle=" + gametitle + ", gameyear=" + gameyear + ", gamepublisher="
+					+ gamepublisher + ", console=" + this.getConsole() + ", series=" + this.getSeries() + "]";
+		if (this.series != null)
+			return "Game [gameid=" + gameid + ", gametitle=" + gametitle + ", gameyear=" + gameyear + ", gamepublisher="
+					+ gamepublisher + ", console=" + this.getSeries() + "]";
 		if (this.console != null)
 			return "Game [gameid=" + gameid + ", gametitle=" + gametitle + ", gameyear=" + gameyear + ", gamepublisher="
 			+ gamepublisher + ", console=" + this.getConsole() + "]";

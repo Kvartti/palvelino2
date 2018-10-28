@@ -11,6 +11,8 @@ import palvelino.harjoitustyo.domain.Console;
 import palvelino.harjoitustyo.domain.ConsoleRepository;
 import palvelino.harjoitustyo.domain.Game;
 import palvelino.harjoitustyo.domain.GameRepository;
+import palvelino.harjoitustyo.domain.Series;
+import palvelino.harjoitustyo.domain.SeriesRepository;
 
 @SpringBootApplication
 public class GameApplication {
@@ -22,14 +24,18 @@ public class GameApplication {
 	}
 	
 	@Bean
-	public CommandLineRunner gameDemo(GameRepository grepository, ConsoleRepository crepository) { 
+	public CommandLineRunner gameDemo(GameRepository grepository, ConsoleRepository crepository, SeriesRepository srepository) { 
 		return (args) -> {
 			crepository.save(new Console("PS4", "Sony"));
 			crepository.save(new Console("PC", null));
 			crepository.save(new Console("Switch", "Nintendo"));
+
+			srepository.save(new Series("-"));
+			srepository.save(new Series("The Legend of Zelda"));
+			srepository.save(new Series("Persona"));
 			
-			grepository.save(new Game("Overwatch", 2016, "Blizzard", crepository.findByConsolename("PC").get(0)));
-			grepository.save(new Game("Breath of the Wild", 2017, "Nintendo", crepository.findByConsolename("Switch").get(0)));
+			grepository.save(new Game("Overwatch", 2016, "Blizzard", crepository.findByConsolename("PC").get(0), srepository.findBySeriesname("-").get(0)));
+			grepository.save(new Game("Breath of the Wild", 2017, "Nintendo", crepository.findByConsolename("Switch").get(0), srepository.findBySeriesname("The Legend of Zelda").get(0)));
 				
 			log.info("fetch games");
 			for (Game game : grepository.findAll()) {

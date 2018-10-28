@@ -10,16 +10,21 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import palvelino.harjoitustyo.domain.ConsoleRepository;
 import palvelino.harjoitustyo.domain.Game;
 import palvelino.harjoitustyo.domain.GameRepository;
+import palvelino.harjoitustyo.domain.SeriesRepository;
 
 @Controller
 public class GameController {
 	
 	@Autowired
 	GameRepository grepository;
+	@Autowired
+	ConsoleRepository crepository;
+	@Autowired
+	SeriesRepository srepository;
 	
-	// autolistaus
 	@RequestMapping(value = "/gamelist", method = RequestMethod.GET)
 	public String listGames(Model model) {
 			List<Game> games =  (List<Game>) grepository.findAll(); // haeta tietokannasta autot
@@ -30,14 +35,17 @@ public class GameController {
 
 	@RequestMapping(value = "/newgame", method = RequestMethod.GET)
 	public String getGameForm(Model model) {
-		model.addAttribute("game", new Game()); // "tyhjä" auto-olio
+		model.addAttribute("game", new Game());
+    	model.addAttribute("consoles", crepository.findAll());
+    	model.addAttribute("serieses", srepository.findAll());
 		return "gameform";
 	}
 	
     @RequestMapping(value = "/gameform")
     public String addGame(Model model){
     	model.addAttribute("game", new Game());
-    	//model.addAttribute("categories", crepository.findAll());
+    	model.addAttribute("consoles", crepository.findAll());
+    	model.addAttribute("serieses", srepository.findAll());
         return "gameform";
     }     
     
