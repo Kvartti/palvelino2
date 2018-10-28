@@ -6,15 +6,15 @@
 </head>
 <body>
 	<h1>Add Game</h1>
-	<form th:object="${game}" th:action="@{/save}" action="#" method="post">
+	<form th:object="${game}" th:action="@{/savegame}" action="#" method="post">
 	<label for="serieslist">Series:</label>
 		<select id="serieslist" th:field="*{series}">
        		<option th:each="series: ${serieses}" th:value="${series.seriesid}" th:text="${series.seriesname}"></option>
     	</select> <a href="/newseries">New Series</a>
 	<br/>
-	<p>Title: <input type="text" th:field="${game.gametitle}" /></p>
-	<p>Year: <input type="text" th:field="${game.gameyear}" /></p>
-	<p>Publisher: <input type="text" th:field="${game.gamepublisher}" /></p>
+	<p>Title: <input type="text" th:field="*{gametitle}" /></p>
+	<p>Year: <input type="text" th:field="*{gameyear}" /></p>
+	<p>Publisher: <input type="text" th:field="*{gamepublisher}" /></p>
 	<br/><br/>
 	<label for="consolelist">Console:</label>
 		<select id="consolelist" th:field="*{console}">

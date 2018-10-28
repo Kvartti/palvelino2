@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Game</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Edit Game</h1>
+	<form th:object="${editgame}" th:action="@{/savegame}" action="#" method="post">
+		<input type="hidden" th:field="${editgame.gameid}" />
+		<label for="serieslist">Series:</label>
+			<select id="serieslist" th:field="*{series}">
+	       		<option th:each="series: ${serieses}" th:value="${series.seriesid}" th:text="${series.seriesname}"></option>
+	    	</select>
+		<br/>
+		<p>Title: <input type="text" th:field="*{gametitle}" /></p>
+		<p>Year: <input type="text" th:field="*{gameyear}" /></p>
+		<p>Publisher: <input type="text" th:field="*{gamepublisher}" /></p>
+		<br/><br/>
+		<label for="consolelist">Console:</label>
+			<select id="consolelist" th:field="*{console}">
+	       		<option th:each="console: ${consoles}" th:value="${console.consoleid}" th:text="${console.consolename}"></option>
+	    	</select>
+		<br/><br/>
+		<input type="submit" value="Save" /> <input type="reset" value="Reset" />
+		</form>
+	<br/><br/>
+	<a href="/gamelist">Homepage</a>
+    
+</body>
+</html>

@@ -3,31 +3,27 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 <head>
-<title>Game List</title>
+<title>Console List</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<h1>Games</h1>
+	<h1>Consoles</h1>
 	<div class="w3-container">
 	<table class="w3-table-all w3-card-4">
 		<tr>
-			<th>Series</th>
 			<th>Title</th>
 			<th>Publisher</th>
-			<th>Year</th>
-			<th>Console</th>
+			<th>Games</th>
 			<th></th>
 			<th></th>
 		</tr>
 
-		<tr th:each="game : ${games}">
-			<td th:text="${game.series.seriesname}">Series</td>
-			<td th:text="${game.gametitle}">Title</td>
-			<td th:text="${game.gamepublisher}">Publisher</td>
-			<td th:text="${game.gameyear}">Year</td>
-			<td th:text="${game.console.consolename}">Console</td>
- 			<td><a th:href="@{/editgame/{id}(id=${game.gameid})}">Edit</a></td>  
- 			<td><a th:href="@{/delete/{id}(id=${game.gameid})}">Delete</a></td> 
+		<tr th:each="console : ${consoles}">
+			<td th:text="${console.consolename}">Name</td>
+			<td th:text="${console.consolepublisher}">Publisher</td>
+			<td>0</td>
+ 			<td>edit</td> 
+ 			<td><a th:href="@{/deleteconsole/{id}(id=${console.consoleid})}">Delete</a></td> 
 		</tr>
 	</table>
 	<br/>

@@ -1,26 +1,14 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Game Form</title>
+    <title>Console Form</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<h1>Add Game</h1>
-	<form th:object="${game}" th:action="@{/save}" action="#" method="post">
-	<label for="serieslist">Series:</label>
-		<select id="serieslist" th:field="*{series}">
-       		<option th:each="series: ${serieses}" th:value="${series.seriesid}" th:text="${series.seriesname}"></option>
-    	</select> <a href="/newseries">New Series</a>
-	<br/>
-	<p>Title: <input type="text" th:field="${game.gametitle}" /></p>
-	<p>Year: <input type="text" th:field="${game.gameyear}" /></p>
-	<p>Publisher: <input type="text" th:field="${game.gamepublisher}" /></p>
-	<br/><br/>
-	<label for="consolelist">Console:</label>
-		<select id="consolelist" th:field="*{console}">
-       		<option th:each="console: ${consoles}" th:value="${console.consoleid}" th:text="${console.consolename}"></option>
-    	</select> <a href="/newconsole">New Console</a>
-	<br/><br/>
+	<h1>Add Console</h1>
+	<form th:object="${console}" th:action="@{/saveconsole}" action="#" method="post">
+	<p>Name: <input type="text" th:field="${console.consolename}" /></p>
+	<p>Publisher: <input type="text" th:field="${console.consolepublisher}" /></p>
 	<input type="submit" value="Save" /> <input type="reset" value="Reset" />
 	</form>
 	<br/><br/>
