@@ -15,6 +15,7 @@
 			<th scope="col">Title</th>
 			<th scope="col">Year</th>
 			<th scope="col">Publisher</th>
+			<th scope="col">Console</th>
 		</tr>
 
 		<tr th:each="game : ${games}">
@@ -22,12 +23,14 @@
 			<td th:text="${game.gametitle}">Title</td>
 			<td th:text="${game.gamepublisher}">Publisher</td>
 			<td th:text="${game.gameyear}">Year</td>
+			<td th:text="${game.console.consolename}">Console</td>
+ 			<td>edit</td> 
  			<td><a th:href="@{/delete/{id}(id=${game.gameid})}">Delete</a></td> 
 		</tr>
 	</table>
 	<a href="/newgame">New Game</a><br/>
-	<a href="/newpublisher">New Publisher</a><br/>
-	<a href="/newseries">New Series</a>
+	<a href="/newseries">New Series</a><br/>
+	<a href="/newconsole">New Console</a><br/>
 </div>
 </body>
 </html>

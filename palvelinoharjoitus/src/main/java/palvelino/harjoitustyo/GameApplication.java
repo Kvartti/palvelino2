@@ -7,6 +7,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import palvelino.harjoitustyo.domain.Console;
+import palvelino.harjoitustyo.domain.ConsoleRepository;
 import palvelino.harjoitustyo.domain.Game;
 import palvelino.harjoitustyo.domain.GameRepository;
 
@@ -20,10 +22,14 @@ public class GameApplication {
 	}
 	
 	@Bean
-	public CommandLineRunner gameDemo(GameRepository grepository) { 
+	public CommandLineRunner gameDemo(GameRepository grepository, ConsoleRepository crepository) { 
 		return (args) -> {
-			grepository.save(new Game("Overwatch", 2016, "Blizzard"));
-			grepository.save(new Game("Breath of the Wild", 2017, "Nintendo"));
+			crepository.save(new Console("PS4", "Sony"));
+			crepository.save(new Console("PC", null));
+			crepository.save(new Console("Switch", "Nintendo"));
+			
+			grepository.save(new Game("Overwatch", 2016, "Blizzard", crepository.findByConsolename("PC").get(0)));
+			grepository.save(new Game("Breath of the Wild", 2017, "Nintendo", crepository.findByConsolename("Switch").get(0)));
 				
 			log.info("fetch games");
 			for (Game game : grepository.findAll()) {

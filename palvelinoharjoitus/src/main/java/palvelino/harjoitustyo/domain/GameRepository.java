@@ -8,8 +8,8 @@ import org.springframework.data.repository.query.Param;
 //@RepositoryRestResource
 public interface GameRepository extends CrudRepository<Game, Long>{
 	
-	List<Game> findByGametitle(String gametitle);
+	//List<Game> findByGametitle(String gametitle);
 
-	//List<Game> findByTitle(@Param(value="gametitle") String gametitle);
+	List<Game> findByGametitle(@Param(value="gametitle") String gametitle);
 
 }

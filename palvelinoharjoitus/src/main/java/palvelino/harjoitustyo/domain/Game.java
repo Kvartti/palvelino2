@@ -17,6 +17,11 @@ public class Game {
 	private String gametitle;
 	private int gameyear;
 	private String gamepublisher;
+	
+	@ManyToOne
+	@JsonIgnore
+	@JoinColumn(name = "consoleid")
+	private Console console;
 
 	public Game() {
 		super();
@@ -25,11 +30,12 @@ public class Game {
 		this.gamepublisher = null;
 	}
 
-	public Game(String gametitle, int gameyear, String gamepublisher) {
+	public Game(String gametitle, int gameyear, String gamepublisher, Console console) {
 		super();
 		this.gametitle = gametitle;
 		this.gameyear = gameyear;
 		this.gamepublisher = gamepublisher;
+		this.console = console;
 	}
 
 	public long getGameid() {
@@ -58,10 +64,23 @@ public class Game {
 	public void setGamepublisher(String gamepublisher) {
 		this.gamepublisher = gamepublisher;
 	}
+	
+	public Console getConsole() {
+		return console;
+	}
+
+	public void setConsole(Console console) {
+		this.console = console;
+	}
+
 
 	@Override
 	public String toString() {
-		return "Game [gameid=" + gameid + ", gametitle=" + gametitle + ", gameyear=" + gameyear + ", gamepublisher="
+		if (this.console != null)
+			return "Game [gameid=" + gameid + ", gametitle=" + gametitle + ", gameyear=" + gameyear + ", gamepublisher="
+			+ gamepublisher + ", console=" + this.getConsole() + "]";
+		else
+			return "Game [gameid=" + gameid + ", gametitle=" + gametitle + ", gameyear=" + gameyear + ", gamepublisher="
 				+ gamepublisher + "]";
 	}
 	
