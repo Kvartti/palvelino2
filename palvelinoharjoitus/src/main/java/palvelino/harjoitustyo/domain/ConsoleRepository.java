@@ -9,4 +9,10 @@ public interface ConsoleRepository extends CrudRepository<Console, Long> {
 	//List<Console> findByConsolename(String console);
 	
 	List<Console> findByConsolename(@Param(value="console") String console);
+
+	/*List <Console> listAll() {
+	    List<Console> counts = new List<>();
+	    crepository.findAll().forEach(consolecount::add);
+	    return consolecount;
+	}*/
 }

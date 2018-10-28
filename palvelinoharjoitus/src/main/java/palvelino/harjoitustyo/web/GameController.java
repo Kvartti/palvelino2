@@ -1,5 +1,6 @@
 package palvelino.harjoitustyo.web;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,14 @@ public class GameController {
 	@RequestMapping(value = "/consolelist", method = RequestMethod.GET)
 	public String listConsoles(Model model) {
         	model.addAttribute("consoles", crepository.findAll());
+        	model.addAttribute("consolecount", crepository.count());
 			return "consolelist";
+	}
+	
+	@RequestMapping(value = "/serieslist", method = RequestMethod.GET)
+	public String listSeries(Model model) {
+        	model.addAttribute("serieses", srepository.findAll());
+			return "serieslist";
 	}
 	
 /*	@RequestMapping(value = "/consolelist", method = RequestMethod.GET)
@@ -76,6 +84,7 @@ public class GameController {
 	@RequestMapping(value = "/newconsole", method = RequestMethod.GET)
 	public String getConsoleForm(Model model) {
 		model.addAttribute("console", new Console());
+    	model.addAttribute("games", grepository.findAll());
 		return "consoleform";
 	}
 	
@@ -95,13 +104,13 @@ public class GameController {
     @RequestMapping(value = "/saveconsole", method = RequestMethod.POST)
     public String saveConsole(Console console){
         crepository.save(console);
-        return "redirect:gamelist";
+        return "redirect:consolelist";
     }  
     
     @RequestMapping(value = "/saveseries", method = RequestMethod.POST)
     public String saveSeries(Series series){
         srepository.save(series);
-        return "redirect:gamelist";
+        return "redirect:serieslist";
     }  
     
     
@@ -126,6 +135,35 @@ public class GameController {
     	crepository.deleteById(consoleid);
         return "redirect:../consolelist";
     } 
+    
+  /*  public List<Console> listAll() {
+        List<Console> consoles = new Arrays<>();
+        crepository.findAll().forEach(consoles::add);
+        return counts;
+    }
+    
+    //COUNT
+    @RequestMapping("/countconsole")
+    public String countConsole(Model model) {
+        model.addAttribute("consoles", countConsole.listAll());
+        return "list";
+    } */
+    
+    /*@RequestMapping(value = "/countconsole/{id}", method = RequestMethod.GET)
+	public String countConsole(@PathVariable("id") Long consoleid, Model model) {
+			model.containsAttribute(arg0)
+			long count = grepository.countByConsole("PC");
+        	model.addAttribute("consoles", crepository.countByName(console);
+			return "consolelist";
+	}
+	
+	System.out.println(" -- finding the employee count in IT dept --");
+    long count = grepository.countByConsole("PC");
+    System.out.println(count); */
+
+
+	
+	
     
   /*  @RequestMapping(value = "/deleteconsole", method = RequestMethod.GET)
     public String deleteConsole(Long consoleid, Console console) {

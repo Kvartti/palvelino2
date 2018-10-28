@@ -1,5 +1,9 @@
 package palvelino.harjoitustyo.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,6 +31,9 @@ public class Game {
 	@JsonIgnore
 	@JoinColumn(name = "seriesid")
 	private Series series;
+	
+	//@ElementCollection
+    //private List<Game> consoleid = new ArrayList<Game>();
 
 	public Game() {
 		super();
