@@ -1,17 +1,54 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="css/form.css" />
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+<link rel="stylesheet" href="css/title.css" />
+<link rel="stylesheet" href="css/menu.css" />
 <head>
     <title>Series Form</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
+		<ul>
+		<li><a href="/newgame">New Game</a></li>
+		<li><a href="/newseries">New Series</a></li>
+		<li><a href="/newconsole">New Console</a></li>
+		<li><a href="/gamelist">Game List</a></li>
+		<li><a href="/serieslist">Series List</a></li>
+		<li><a href="/consolelist">Console List</a></li>
+		<li class="right"><a th:href="@{/logout}">Log Out</a></li>
+		</ul>
+		
+<div class="container">
 	<h1>Add Series</h1>
 	<form th:object="${series}" th:action="@{/saveseries}" action="#" method="post">
-	<p>Name: <input type="text" th:field="${series.seriesname}" /></p>
-	<input type="submit" value="Save" /> <input type="reset" value="Reset" />
+	
+	<div class="row">
+	    <div class="col-25">
+			<label for="name">Name:</label>
+		</div>
+		
+      	<div class="col-75">
+			<input type="text" th:field="${series.seriesname}" />
+		</div>
+	</div>
+		
+	<div class="row">
+	    <div class="col-25">
+			<label for="developer">Developer:</label>
+		</div>
+		
+      	<div class="col-75">
+			<input type="text" th:field="${series.seriesdeveloper}" />
+		</div>
+	</div>
+	<br/>
+	<div class="center">
+		<input type="submit" value="Save" class="w3-button w3-black w3-round-large"/> 
+		<input type="reset" value="Reset" class="w3-button w3-black w3-round-large"/>
+	</div>
 	</form>
-	<br/><br/>
-	<a href="/gamelist">Homepage</a>
+</div>
     
 </body>
 </html>

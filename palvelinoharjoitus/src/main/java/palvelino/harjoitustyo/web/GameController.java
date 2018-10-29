@@ -38,7 +38,8 @@ public class GameController {
 	@RequestMapping(value = "/consolelist", method = RequestMethod.GET)
 	public String listConsoles(Model model) {
         	model.addAttribute("consoles", crepository.findAll());
-        	model.addAttribute("consolecount", crepository.count());
+            model.addAttribute("games", grepository.findAll());
+        	
 			return "consolelist";
 	}
 	

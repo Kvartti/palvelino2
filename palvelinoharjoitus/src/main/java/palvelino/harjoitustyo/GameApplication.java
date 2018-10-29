@@ -27,12 +27,12 @@ public class GameApplication {
 	public CommandLineRunner gameDemo(GameRepository grepository, ConsoleRepository crepository, SeriesRepository srepository) { 
 		return (args) -> {
 			crepository.save(new Console("PS4", "Sony"));
-			crepository.save(new Console("PC", null));
+			crepository.save(new Console("PC", "-"));
 			crepository.save(new Console("Switch", "Nintendo"));
 
-			srepository.save(new Series("-"));
-			srepository.save(new Series("The Legend of Zelda"));
-			srepository.save(new Series("Persona"));
+			srepository.save(new Series("-", "-"));
+			srepository.save(new Series("The Legend of Zelda", "Nintendo"));
+			srepository.save(new Series("Persona", "Atlus"));
 			
 			grepository.save(new Game("Overwatch", 2016, "Blizzard", crepository.findByConsolename("PC").get(0), srepository.findBySeriesname("-").get(0)));
 			grepository.save(new Game("Breath of the Wild", 2017, "Nintendo", crepository.findByConsolename("Switch").get(0), srepository.findBySeriesname("The Legend of Zelda").get(0)));

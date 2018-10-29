@@ -15,15 +15,17 @@ public class Series {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long seriesid;
 	private String seriesname;
+	private String seriesdeveloper;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "series")
 	private List <Game> games;
 	
 	public Series() {}
 
-	public Series(String seriesname) {
+	public Series(String seriesname, String seriesdeveloper) {
 		super();
 		this.seriesname = seriesname;
+		this.seriesdeveloper = seriesdeveloper;
 	}
 
 	public Long getSeriesid() {
@@ -42,6 +44,14 @@ public class Series {
 		this.seriesname = seriesname;
 	}
 
+	public String getSeriesdeveloper() {
+		return seriesdeveloper;
+	}
+
+	public void setSeriesdeveloper(String seriesdeveloper) {
+		this.seriesdeveloper = seriesdeveloper;
+	}
+
 	public List<Game> getGames() {
 		return games;
 	}
@@ -52,7 +62,8 @@ public class Series {
 
 	@Override
 	public String toString() {
-		return "Series [seriesid=" + seriesid + ", seriesname=" + seriesname + "]";
+		return "Series [seriesid=" + seriesid + ", seriesname=" + seriesname + ", seriesdeveloper=" + seriesdeveloper
+				+ "]";
 	}
-	
+
 }

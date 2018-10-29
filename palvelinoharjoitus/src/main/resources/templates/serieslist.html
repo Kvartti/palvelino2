@@ -26,6 +26,7 @@
 	<table class="w3-table-all w3-card-4">
 		<tr>
 			<th>Name</th>
+			<th>Developer</th>
 			<th>Games</th>
 			<th></th>
 			<th></th>
@@ -33,15 +34,12 @@
 
 		<tr th:each="series : ${serieses}">
 			<td th:text="${series.seriesname}">Name</td>
-			<td th:text="${series.seriesname}">Name</td>
+			<td th:text="${series.seriesdeveloper}">Developer</td>
+			<td>0</td>
  			<td>edit</td> 
  			<td>delete</td> 
 		</tr>
 	</table>
-	<br/>
-	<a href="/newgame">New Game</a> - <a href="/gamelist">Game List</a><br/><br/>
-	<a href="/newseries">New Series</a> - <a href="/serieslist">Series List</a><br/>
-	<a href="/newconsole">New Console</a> - <a href="/consolelist">Console List</a><br/>
 </div>
 </body>
 </html>
