@@ -48,30 +48,6 @@ public class GameController {
         	model.addAttribute("serieses", srepository.findAll());
 			return "serieslist";
 	}
-	
-/*	@RequestMapping(value = "/consolelist", method = RequestMethod.GET)
-	public String listConsoles(Model model) {
-		List<Console> consoles =  (List<Console>) crepository.findAll();
-		model.addAttribute("consoles", consoles);
-		return "consolelist";
-} 
-
-    @RequestMapping(value="/booklist")
-    public String bookList(Model model) {	
-        model.addAttribute("books", repository.findAll());
-        return "booklist";
-    }
-
-	@RequestMapping(value = "/gamelist", method = RequestMethod.GET)
-	public String listGames(Model model) {
-			List<Game> games =  (List<Game>) grepository.findAll();
-			model.addAttribute("games", games);
-			return "gamelist";
-	}
-
-
-*/
-
 
 	//NEW FORMS
 	@RequestMapping(value = "/newgame", method = RequestMethod.GET)
@@ -136,58 +112,4 @@ public class GameController {
     	crepository.deleteById(consoleid);
         return "redirect:../consolelist";
     } 
-    
-  /*  public List<Console> listAll() {
-        List<Console> consoles = new Arrays<>();
-        crepository.findAll().forEach(consoles::add);
-        return counts;
-    }
-    
-    //COUNT
-    @RequestMapping("/countconsole")
-    public String countConsole(Model model) {
-        model.addAttribute("consoles", countConsole.listAll());
-        return "list";
-    } */
-    
-    /*@RequestMapping(value = "/countconsole/{id}", method = RequestMethod.GET)
-	public String countConsole(@PathVariable("id") Long consoleid, Model model) {
-			model.containsAttribute(arg0)
-			long count = grepository.countByConsole("PC");
-        	model.addAttribute("consoles", crepository.countByName(console);
-			return "consolelist";
-	}
-	
-	System.out.println(" -- finding the employee count in IT dept --");
-    long count = grepository.countByConsole("PC");
-    System.out.println(count); */
-
-
-	
-	
-    
-  /*  @RequestMapping(value = "/deleteconsole", method = RequestMethod.GET)
-    public String deleteConsole(Long consoleid, Console console) {
-    	crepository.deleteById(consoleid);
-        return "redirect:../gamelist";
-    } */
-
-/*	// autolomakkeella syötettyjen tietojen vastaanotto ja tallennus
-	@RequestMapping(value = "/newgame", method = RequestMethod.POST)
-	public String saveGame(@ModelAttribute Game game) {
-		// talletetaan yhden auton tiedot tietokantaan
-		grepository.save(game);
-		return "redirect:/gamelist";
-	}
-
-	// auton poisto
-	@RequestMapping(value = "/deletecar/{id}", method = RequestMethod.GET)
-	public String deleteCar(@PathVariable("id") Long carId) {
-		carRepository.deleteById(carId);
-		return "redirect:../cars";
-	}
-	
-	// TODO edit car
-	*/
-
 }
