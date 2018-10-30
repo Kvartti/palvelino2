@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <link rel="stylesheet" href="css/form.css" />
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+<link rel="stylesheet" href="css/w3.css" />
 <link rel="stylesheet" href="css/title.css" />
 <link rel="stylesheet" href="css/menu.css" />
 <head>
@@ -9,15 +9,24 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-		<ul>
-		<li><a href="/newgame">New Game</a></li>
-		<li><a href="/newseries">New Series</a></li>
-		<li><a href="/newconsole">New Console</a></li>
+	<ul>
+		<li sec:authorize="hasAuthority('ADMIN')"><a href="/newgame">New Game</a></li>
+		<li sec:authorize="hasAuthority('ADMIN')"><a href="/newseries">New Series</a></li>
+		<li sec:authorize="hasAuthority('ADMIN')"><a href="/newconsole">New Console</a></li>
 		<li><a href="/gamelist">Game List</a></li>
 		<li><a href="/serieslist">Series List</a></li>
 		<li><a href="/consolelist">Console List</a></li>
-		<li class="right"><a th:href="@{/logout}">Log Out</a></li>
-		</ul>
+		<li class="right">
+			
+			<form action="/login" method="post" sec:authorize="isAnonymous()">
+				<input type="submit" value="Sign In" class="logbutton"/>
+			</form>
+			
+			<form th:action="@{/logout}" method="post" sec:authorize="hasAuthority('ADMIN')">
+				<input type="submit" value="Sign Out" class="logbutton"/>
+			</form>
+		</li>
+	</ul>
 		
 <div class="container">
 	<h1>Add Game</h1>

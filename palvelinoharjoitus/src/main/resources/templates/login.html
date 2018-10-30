@@ -1,20 +1,63 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-    <head>
-        <title>Booklist log in</title>
-    </head>
-    <body>
-        <div th:if="${param.error}">
-            Invalid username and password.
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<link rel="stylesheet" href="css/form.css" />
+<link rel="stylesheet" href="css/w3.css" />
+<link rel="stylesheet" href="css/title.css" />
+<link rel="stylesheet" href="css/menu.css" />
+
+
+<head>
+<title>Game List</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<ul>
+		<li sec:authorize="hasAuthority('ADMIN')"><a href="/newgame">New Game</a></li>
+		<li sec:authorize="hasAuthority('ADMIN')"><a href="/newseries">New Series</a></li>
+		<li sec:authorize="hasAuthority('ADMIN')"><a href="/newconsole">New Console</a></li>
+		<li><a href="/gamelist">Game List</a></li>
+		<li><a href="/serieslist">Series List</a></li>
+		<li><a href="/consolelist">Console List</a></li>
+		<li class="right" sec:authorize="isAnonymous()"><a th:href="@{/login}">Log In</a></li>
+		<li class="right" sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/login}">Log Out</a></li>
+	</ul>
+		
+<div class="container">
+	<h1>Sign In</h1>
+	
+	 	<div th:if="${param.error}" class="subtitle">
+            <font color="red">Invalid username and/or password</font><br/><br/>
         </div>
-        <div th:if="${param.logout}">
-            You have been logged out.
+        <div th:if="${param.logout}" class="subtitle">
+            You have been logged out.<br/><br/>
         </div>
-        <form th:action="@{/login}" method="post">
-            <div><label> User Name : <input type="text" name="username"/> </label></div>
-            <div><label> Password: <input type="password" name="password"/> </label></div>
-            <div><input type="submit" value="Sign In"/></div>
+
+	<form th:action="@{/login}" method="post">
+	
+    <div class="row">
+	    <div class="col-25">
+           <label> User Name :</label>
+		</div>
+		
+      	<div class="col-75">
+		   <input type="text" name="username"/>
+		</div>
+	</div>
+       
+    <div class="row">
+	    <div class="col-25">
+	    	<label> Password: </label>
+		</div>
+		
+      	<div class="col-75">
+	    	<input type="password" name="password"/>
+	    </div>
+	</div>
+	<div class="center">
+            <input type="submit" value="Sign In" class="w3-button w3-black w3-round-large"/>
+    </div>
         </form>
+        
+</div>
     </body>
 </html>

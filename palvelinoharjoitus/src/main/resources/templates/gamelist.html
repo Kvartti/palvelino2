@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+<link rel="stylesheet" href="css/w3.css" />
 <link rel="stylesheet" href="css/title.css" />
 <link rel="stylesheet" href="css/menu.css" />
 
@@ -11,17 +11,26 @@
 </head>
 <body>
 	<ul>
-		<li><a href="/newgame">New Game</a></li>
-		<li><a href="/newseries">New Series</a></li>
-		<li><a href="/newconsole">New Console</a></li>
+		<li sec:authorize="hasAuthority('ADMIN')"><a href="/newgame">New Game</a></li>
+		<li sec:authorize="hasAuthority('ADMIN')"><a href="/newseries">New Series</a></li>
+		<li sec:authorize="hasAuthority('ADMIN')"><a href="/newconsole">New Console</a></li>
 		<li><a href="/gamelist">Game List</a></li>
 		<li><a href="/serieslist">Series List</a></li>
 		<li><a href="/consolelist">Console List</a></li>
-		<li class="right"><a th:href="@{/logout}">Log Out</a></li>
+		<li class="right">
+			
+			<form action="/login" method="post" sec:authorize="isAnonymous()">
+				<input type="submit" value="Sign In" class="logbutton"/>
+			</form>
+			
+			<form th:action="@{/logout}" method="post" sec:authorize="hasAuthority('ADMIN')">
+				<input type="submit" value="Sign Out" class="logbutton"/>
+			</form>
+		</li>
 	</ul>
 	
 	<h1>Games</h1>
-	<p class="subtitle">Signed in as -</p>
+	<p class="subtitle" sec:authorize="isAuthenticated()">Signed in as [[${#httpServletRequest.remoteUser}]]</p>
 	
 	<div class="w3-container">
 	<table class="w3-table-all w3-card-4">
@@ -31,8 +40,8 @@
 			<th>Publisher</th>
 			<th>Year</th>
 			<th>Console</th>
-			<th></th>
-			<th></th>
+			<th sec:authorize="hasAuthority('ADMIN')"></th>
+			<th sec:authorize="hasAuthority('ADMIN')"></th>
 		</tr>
 
 		<tr th:each="game : ${games}">
@@ -41,8 +50,8 @@
 			<td th:text="${game.gamepublisher}">Publisher</td>
 			<td th:text="${game.gameyear}">Year</td>
 			<td th:text="${game.console.consolename}">Console</td>
- 			<td><a th:href="@{/editgame/{id}(id=${game.gameid})}">Edit</a></td>  
- 			<td><a th:href="@{/delete/{id}(id=${game.gameid})}">Delete</a></td> 
+ 			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/editgame/{id}(id=${game.gameid})}">Edit</a></td>  
+ 			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${game.gameid})}">Delete</a></td> 
 		</tr>
 	</table>
 	<br/><br/>
