@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import palvelino.harjoitustyo.domain.Console;
 import palvelino.harjoitustyo.domain.ConsoleRepository;
@@ -28,6 +29,11 @@ public class GameController {
 	@Autowired
 	SeriesRepository srepository;
 	
+    @RequestMapping(value="/login")
+    public String login() {	
+        return "login";
+    }	
+	
 	//LISTS
 	@RequestMapping(value = "/gamelist", method = RequestMethod.GET)
 	public String listGames(Model model) {
@@ -39,13 +45,13 @@ public class GameController {
 	public String listConsoles(Model model) {
         	model.addAttribute("consoles", crepository.findAll());
             model.addAttribute("games", grepository.findAll());
-        	
 			return "consolelist";
 	}
 	
 	@RequestMapping(value = "/serieslist", method = RequestMethod.GET)
 	public String listSeries(Model model) {
         	model.addAttribute("serieses", srepository.findAll());
+            model.addAttribute("games", grepository.findAll());
 			return "serieslist";
 	}
 
@@ -71,7 +77,7 @@ public class GameController {
 		return "seriesform";
 	}
     
-	//SAVE NEW
+	//SAVE
     @RequestMapping(value = "/savegame", method = RequestMethod.POST)
     public String saveGame(Game game){
         grepository.save(game);
@@ -100,6 +106,14 @@ public class GameController {
         return "gameedit";
     }
     
+    @RequestMapping(value= "/editconsole/{id}", method = RequestMethod.GET)
+    public String editConsole(@PathVariable("id") Long consoleid, Model model) {
+        model.addAttribute("editconsole", crepository.findById(consoleid));
+    	model.addAttribute("consoles", crepository.findAll());
+    	model.addAttribute("serieses", srepository.findAll());
+        return "consoleedit";
+    }
+    
     //DELETE
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String deleteGame(@PathVariable("id") Long gameid, Model model) {
@@ -112,4 +126,5 @@ public class GameController {
     	crepository.deleteById(consoleid);
         return "redirect:../consolelist";
     } 
+    
 }

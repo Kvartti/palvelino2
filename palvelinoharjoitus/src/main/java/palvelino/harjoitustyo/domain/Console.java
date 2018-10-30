@@ -21,7 +21,7 @@ public class Console {
 	private String consolename;
 	private String consolepublisher;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "console")
+	@OneToMany(mappedBy = "console")
 	private List <Game> games;
 	
 	public Console() {}
@@ -55,6 +55,10 @@ public class Console {
 	public void setConsolepublisher(String consolepublisher) {
 		this.consolepublisher = consolepublisher;
 	}
+	
+	public int getGamecount() {
+		return this.games.size();
+	}
 
 	public List<Game> getGames() {
 		return games;
@@ -69,5 +73,4 @@ public class Console {
 		return "Console [consoleid=" + consoleid + ", consolename=" + consolename + ", consolepublisher="
 				+ consolepublisher + "]";
 	}
-
 }

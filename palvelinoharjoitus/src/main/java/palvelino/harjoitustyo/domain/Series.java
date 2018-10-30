@@ -17,7 +17,7 @@ public class Series {
 	private String seriesname;
 	private String seriesdeveloper;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "series")
+	@OneToMany(mappedBy = "series")
 	private List <Game> games;
 	
 	public Series() {}
@@ -50,6 +50,10 @@ public class Series {
 
 	public void setSeriesdeveloper(String seriesdeveloper) {
 		this.seriesdeveloper = seriesdeveloper;
+	}
+	
+	public int getGamecount() {
+		return this.games.size();
 	}
 
 	public List<Game> getGames() {
