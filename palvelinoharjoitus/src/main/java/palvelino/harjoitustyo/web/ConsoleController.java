@@ -2,6 +2,7 @@ package palvelino.harjoitustyo.web;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import palvelino.harjoitustyo.domain.Console;
 import palvelino.harjoitustyo.domain.ConsoleRepository;
@@ -71,5 +73,17 @@ public class ConsoleController {
     public String deleteConsole(@PathVariable("id") Long consoleid, Model model) {
     	crepository.deleteById(consoleid);
         return "redirect:../consolelist";
+    } 
+    
+    //REST, all consoles
+    @RequestMapping(value="/consoles", method = RequestMethod.GET)
+    public @ResponseBody List<Console> consoleListRest() {	
+        return (List<Console>) crepository.findAll();
+    }
+    
+    //REST, console by id
+    @RequestMapping(value="/console/{id}", method = RequestMethod.GET)
+    public @ResponseBody Optional<Console> findConsoleRest(@PathVariable("id") Long consoleid) {	
+    	return crepository.findById(consoleid);
     } 
 }

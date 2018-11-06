@@ -2,6 +2,7 @@ package palvelino.harjoitustyo.web;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import palvelino.harjoitustyo.domain.Console;
 import palvelino.harjoitustyo.domain.ConsoleRepository;
@@ -76,5 +78,17 @@ public class GameController {
     	grepository.deleteById(gameid);
         return "redirect:../gamelist";
     }  
+    
+    //REST, all games
+    @RequestMapping(value="/games", method = RequestMethod.GET)
+    public @ResponseBody List<Game> gameListRest() {	
+        return (List<Game>) grepository.findAll();
+    }
+    
+    //REST, game by id
+    @RequestMapping(value="/game/{id}", method = RequestMethod.GET)
+    public @ResponseBody Optional<Game> findGameRest(@PathVariable("id") Long gameid) {	
+    	return grepository.findById(gameid);
+    }    
 
 }
