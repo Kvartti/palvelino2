@@ -40,8 +40,6 @@ public class GameController {
     public String login() {	
         return "login";
     }	
-	
-    
     
 	//LIST
 	@RequestMapping(value = "/gamelist", method = RequestMethod.GET)
@@ -59,12 +57,13 @@ public class GameController {
 		return "gameform";
 	}
 	
+	
 	//SAVE
-    @RequestMapping(value = "/savegame", method = RequestMethod.POST)
+  /*  @RequestMapping(value = "/savegame", method = RequestMethod.POST)
     public String saveGame(Game game){
         grepository.save(game);
         return "redirect:gamelist";
-    }  
+    }  */
 
     //EDIT
     @RequestMapping(value= "/editgame/{id}", method = RequestMethod.GET)

@@ -28,15 +28,15 @@
 		</li>
 	</ul>
 	
-	<h1>Series</h1>	
+	<h1 th:text="#{spagetitle}">Series</h1>	
 	<p class="subtitle" sec:authorize="isAuthenticated()">Signed in as [[${#httpServletRequest.remoteUser}]]</p>
 	
 	<div class="w3-container">
 	<table class="w3-table-all w3-card-4">
 		<tr>
-			<th>Name</th>
-			<th>Developer</th>
-			<th>Games</th>
+			<th th:text="#{name}">Name</th>
+			<th th:text="#{developer}">Developer</th>
+			<th th:text="#{games}">Games</th>
 			<th sec:authorize="hasAuthority('ADMIN')"></th>
 			<th sec:authorize="hasAuthority('ADMIN')"></th>
 		</tr>
@@ -45,9 +45,9 @@
 			<td th:text="${series.seriesname}">Name</td>
 			<td th:text="${series.seriesdeveloper}">Developer</td>
             <td th:text="${series.gamecount}">#0</td>
- 			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/editseries/{id}(id=${series.seriesid})}">Edit</a></td>  
- 			<td sec:authorize="hasAuthority('ADMIN')" th:if="${series.gamecount == 0}"><a th:href="@{/deleteseries/{id}(id=${series.seriesid})}">Delete</a></td> 
-			<td sec:authorize="hasAuthority('ADMIN')" th:unless="${series.gamecount == 0}" class="forbidden">Delete</td> 
+ 			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/editseries/{id}(id=${series.seriesid})}" th:text="#{edit}">Edit</a></td>  
+ 			<td sec:authorize="hasAuthority('ADMIN')" th:if="${series.gamecount == 0}"><a th:href="@{/deleteseries/{id}(id=${series.seriesid})}" th:text="#{delete}">Delete</a></td> 
+			<td sec:authorize="hasAuthority('ADMIN')" th:unless="${series.gamecount == 0}" class="forbidden" th:text="#{delete}">Delete</td> 
 		</tr>
 	</table>
 </div>

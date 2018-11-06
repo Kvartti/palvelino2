@@ -8,38 +8,57 @@
 <head>
 <title>Game List</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#locales").change(function () {
+                var selectedOption = $('#locales').val();
+                if (selectedOption !== ''){
+                    window.location.replace('locale?lang=' + selectedOption);
+                }
+            });
+        });
+    </script>
 </head>
+
 <body>
 	<ul>
-		<li sec:authorize="hasAuthority('ADMIN')"><a href="/newgame">New Game</a></li>
-		<li sec:authorize="hasAuthority('ADMIN')"><a href="/newseries">New Series</a></li>
-		<li sec:authorize="hasAuthority('ADMIN')"><a href="/newconsole">New Console</a></li>
-		<li><a href="/gamelist">Game List</a></li>
-		<li><a href="/serieslist">Series List</a></li>
-		<li><a href="/consolelist">Console List</a></li>
+		<li sec:authorize="hasAuthority('ADMIN')"><a href="/newgame" th:text="#{newg}">New Game</a></li>
+		<li sec:authorize="hasAuthority('ADMIN')"><a href="/newseries" th:text="#{news}">New Series</a></li>
+		<li sec:authorize="hasAuthority('ADMIN')"><a href="/newconsole" th:text="#{newc}">New Console</a></li>
+		<li><a href="/gamelist" th:text="#{glist}">Game List</a></li>
+		<li><a href="/serieslist" th:text="#{slist}">Series List</a></li>
+		<li><a href="/consolelist" th:text="#{clist}">Console List</a></li>
 		<li class="right">
-			
 			<form action="/login" method="post" sec:authorize="isAnonymous()">
-				<input type="submit" value="Sign In" class="logbutton"/>
+				<input type="submit" value="Sign In" class="logbutton" th:value="#{signin}"/>
 			</form>
 			
 			<form th:action="@{/logout}" method="post" sec:authorize="hasAuthority('ADMIN')">
-				<input type="submit" value="Sign Out" class="logbutton"/>
+				<input type="submit" value="Sign Out" class="logbutton" th:value="#{signout}"/>
 			</form>
 		</li>
 	</ul>
 	
-	<h1>Games</h1>
-	<p class="subtitle" sec:authorize="isAuthenticated()">Signed in as [[${#httpServletRequest.remoteUser}]]</p>
+	<h1 th:text="#{gpagetitle}">Games</h1>
+	<p class="subtitle" sec:authorize="isAuthenticated()" th:text="#{signedintext}">Signed in as</p>
+	<p class="subtitle" sec:authorize="isAuthenticated()" >[[${#httpServletRequest.remoteUser}]]</p>
+
+	<span th:text="#{lang.change}"></span>:
+		<select id="locales">
+		    <option value=""></option>
+		    <option value="en" th:text="#{lang.en}"></option>
+		    <option value="fi" th:text="#{lang.fi}"></option>
+		</select>
 	
 	<div class="w3-container">
 	<table class="w3-table-all w3-card-4">
 		<tr>
-			<th>Series</th>
-			<th>Title</th>
-			<th>Publisher</th>
-			<th>Year</th>
-			<th>Console</th>
+			<th th:text="#{series}">Series</th>
+			<th th:text="#{title}">Title</th>
+			<th th:text="#{publisher}">Publisher</th>
+			<th th:text="#{year}">Year</th>
+			<th th:text="#{console}">Console</th>
 			<th sec:authorize="hasAuthority('ADMIN')"></th>
 			<th sec:authorize="hasAuthority('ADMIN')"></th>
 		</tr>
@@ -50,8 +69,8 @@
 			<td th:text="${game.gamepublisher}">Publisher</td>
 			<td th:text="${game.gameyear}">Year</td>
 			<td th:text="${game.console.consolename}">Console</td>
- 			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/editgame/{id}(id=${game.gameid})}">Edit</a></td>  
- 			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${game.gameid})}">Delete</a></td> 
+ 			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/editgame/{id}(id=${game.gameid})}" th:text="#{edit}">Edit</a></td>  
+ 			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${game.gameid})}" th:text="#{delete}">Delete</a></td> 
 		</tr>
 	</table>
 	<br/><br/>

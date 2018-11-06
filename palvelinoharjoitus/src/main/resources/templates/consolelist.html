@@ -28,19 +28,15 @@
 		</li>
 	</ul>
 	
-	<h1>Consoles</h1>
+	<h1 th:text="#{cpagetitle}">Consoles</h1>
 	<p class="subtitle" sec:authorize="isAuthenticated()">Signed in as [[${#httpServletRequest.remoteUser}]]</p>
-	
-		 	<div th:if="${param.error}" class="subtitle">
-            <font color="red">Invalid username and/or password</font><br/><br/>
-        </div>
 	
 	<div class="w3-container">
 	<table class="w3-table-all w3-card-4">
 		<tr>
-			<th>Name</th>
-			<th>Publisher</th>
-			<th>Games</th>
+			<th th:text="#{name}">Name</th>
+			<th th:text="#{publisher}">Publisher</th>
+			<th th:text="#{games}">Games</th>
 			<th sec:authorize="hasAuthority('ADMIN')"></th>
 			<th sec:authorize="hasAuthority('ADMIN')"></th>
 		</tr>
@@ -49,9 +45,9 @@
 			<td th:text="${console.consolename}">Name</td>
 			<td th:text="${console.consolepublisher}">Publisher</td>
             <td th:text="${console.gamecount}">#0</td>
- 			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/editconsole/{id}(id=${console.consoleid})}">Edit</a></td>  
- 			<td sec:authorize="hasAuthority('ADMIN')" th:if="${console.gamecount == 0}"><a th:href="@{/deleteconsole/{id}(id=${console.consoleid})}">Delete</a></td>
- 			<td sec:authorize="hasAuthority('ADMIN')" th:unless="${console.gamecount == 0}" class="forbidden">Delete</td> 
+ 			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/editconsole/{id}(id=${console.consoleid})}" th:text="#{edit}">Edit</a></td>  
+ 			<td sec:authorize="hasAuthority('ADMIN')" th:if="${console.gamecount == 0}"><a th:href="@{/deleteconsole/{id}(id=${console.consoleid})}" th:text="#{delete}">Delete</a></td>
+ 			<td sec:authorize="hasAuthority('ADMIN')" th:unless="${console.gamecount == 0}" class="forbidden" th:text="#{delete}">Delete</td> 
 		</tr>
 	</table>
 </div>

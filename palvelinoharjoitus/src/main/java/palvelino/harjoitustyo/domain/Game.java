@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Digits;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -21,8 +22,8 @@ public class Game {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long gameid;
 	private String gametitle;
-	private int gameyear;
 	private String gamepublisher;
+	private int gameyear;
 	
 	@ManyToOne
 	@JsonIgnore

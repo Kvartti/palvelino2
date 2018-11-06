@@ -12,14 +12,21 @@
 </head>
 <body>
 	<ul>
-		<li sec:authorize="hasAuthority('ADMIN')"><a href="/newgame">New Game</a></li>
-		<li sec:authorize="hasAuthority('ADMIN')"><a href="/newseries">New Series</a></li>
-		<li sec:authorize="hasAuthority('ADMIN')"><a href="/newconsole">New Console</a></li>
-		<li><a href="/gamelist">Game List</a></li>
-		<li><a href="/serieslist">Series List</a></li>
-		<li><a href="/consolelist">Console List</a></li>
-		<li class="right" sec:authorize="isAnonymous()"><a th:href="@{/login}">Sign In</a></li>
-		<li class="right" sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/login}">Sign Out</a></li>
+		<li sec:authorize="hasAuthority('ADMIN')"><a href="/newgame" th:text="#{newg}">New Game</a></li>
+		<li sec:authorize="hasAuthority('ADMIN')"><a href="/newseries" th:text="#{news}">New Series</a></li>
+		<li sec:authorize="hasAuthority('ADMIN')"><a href="/newconsole" th:text="#{newc}">New Console</a></li>
+		<li><a href="/gamelist" th:text="#{glist}">Game List</a></li>
+		<li><a href="/serieslist" th:text="#{slist}">Series List</a></li>
+		<li><a href="/consolelist" th:text="#{clist}">Console List</a></li>
+		<li class="right">
+			<form action="/login" method="post" sec:authorize="isAnonymous()">
+				<input type="submit" value="Sign In" class="logbutton" th:value="#{signin}"/>
+			</form>
+			
+			<form th:action="@{/logout}" method="post" sec:authorize="hasAuthority('ADMIN')">
+				<input type="submit" value="Sign Out" class="logbutton" th:value="#{signout}"/>
+			</form>
+		</li>
 	</ul>
 		
 <div class="container">
@@ -28,7 +35,7 @@
 	 	<div th:if="${param.error}" class="subtitle">
             <font color="red">Invalid username and/or password</font><br/><br/>
         </div>
-        <div th:if="${param.logout}" class="subtitle">
+        <div th:if="${param.logout}" class="subtitle" th:text="#{signoutmessage}">
             You have been logged out.<br/><br/>
         </div>
 
@@ -36,7 +43,7 @@
 	
     <div class="row">
 	    <div class="col-25">
-           <label> User Name :</label>
+           <label th:text="#{usernd}"> User Name :</label>
 		</div>
 		
       	<div class="col-75">
@@ -46,7 +53,7 @@
        
     <div class="row">
 	    <div class="col-25">
-	    	<label> Password: </label>
+	    	<label th:text="#{passwd}"> Password: </label>
 		</div>
 		
       	<div class="col-75">
@@ -54,7 +61,7 @@
 	    </div>
 	</div>
 	<div class="center">
-            <input type="submit" value="Sign In" class="w3-button w3-black w3-round-large"/>
+            <input type="submit" value="Sign In" class="w3-button w3-black w3-round-large" th:value="#{signin}"/>
     </div>
         </form>
         

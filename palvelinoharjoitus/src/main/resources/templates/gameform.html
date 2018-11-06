@@ -29,12 +29,12 @@
 	</ul>
 		
 <div class="container">
-	<h1>Add Game</h1>
+	<h1 th:text="#{addg}">Add Game</h1>
 	<form th:object="${game}" th:action="@{/savegame}" action="#" method="post">
 	
     <div class="row">
 	    <div class="col-25">
-			<label for="serieslist">Series:</label>
+			<label for="serieslist" th:text="#{seriesd}">Series:</label>
 		</div>
 		
       	<div class="col-75">
@@ -46,7 +46,7 @@
     
     <div class="row">
 	    <div class="col-25">
-	    	<label for="title">Title:</label>
+	    	<label for="title" th:text="#{titled}">Title:</label>
 		</div>
 		<div class="col-75">
 			<input type="text" th:field="*{gametitle}" />
@@ -55,16 +55,17 @@
 	
     <div class="row">
 	    <div class="col-25">
-	    	<label for="title">Year:</label>
+	    	<label for="title" th:text="#{yeard}">Year:</label>
 		</div>
 		<div class="col-75">		
 			<input type="text" th:field="*{gameyear}" />
+             <div th:if="${#fields.hasErrors('gameyear')}"><font color="red">Only numbers</font></div>
 	  	</div>
     </div>
 	
     <div class="row">
 	    <div class="col-25">
-	    	<label for="title">Publisher:</label>
+	    	<label for="title" th:text="#{publisherd}">Publisher:</label>
 		</div>
 		<div class="col-75">		
 			<input type="text" th:field="*{gamepublisher}" />
@@ -73,7 +74,7 @@
 	
     <div class="row">
 	    <div class="col-25">
-			<label for="consolelist">Console:</label>
+			<label for="consolelist" th:text="#{consoled}">Console:</label>
 		</div>
 		<div class="col-75">	
 			<select id="consolelist" th:field="*{console}">
@@ -83,7 +84,8 @@
     </div>
 	<br/>
 	<div class="center">
-	<input type="submit" value="Save" class="w3-button w3-black w3-round-large"/> <input type="reset" value="Reset" class="w3-button w3-black w3-round-large"/>
+	<input type="submit" value="Save" class="w3-button w3-black w3-round-large" th:value="#{save}"/> 
+	<input type="reset" value="Reset" class="w3-button w3-black w3-round-large" th:value="#{reset}"/>
 	</div>
 	</form>
 	
