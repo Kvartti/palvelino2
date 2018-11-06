@@ -24,7 +24,7 @@ import palvelino.harjoitustyo.domain.Series;
 import palvelino.harjoitustyo.domain.SeriesRepository;
 
 @Controller
-public class GameController {
+public class ConsoleController {
 	
 	@Autowired
 	GameRepository grepository;
@@ -33,48 +33,43 @@ public class GameController {
 	@Autowired
 	SeriesRepository srepository;
 	
-    @RequestMapping(value="/login")
-    public String login() {	
-        return "login";
-    }	
-	
 	//LIST
-	@RequestMapping(value = "/gamelist", method = RequestMethod.GET)
-	public String listGames(Model model) {
-        model.addAttribute("games", grepository.findAll());
-			return "gamelist";
+	@RequestMapping(value = "/consolelist", method = RequestMethod.GET)
+	public String listConsoles(Model model) {
+        	model.addAttribute("consoles", crepository.findAll());
+            model.addAttribute("games", grepository.findAll());
+			return "consolelist";
 	}
 	
 	//NEW FORM
-	@RequestMapping(value = "/newgame", method = RequestMethod.GET)
-	public String getGameForm(Model model) {
-		model.addAttribute("game", new Game());
-    	model.addAttribute("consoles", crepository.findAll());
-    	model.addAttribute("serieses", srepository.findAll());
-		return "gameform";
+	@RequestMapping(value = "/newconsole", method = RequestMethod.GET)
+	public String getConsoleForm(Model model) {
+		model.addAttribute("console", new Console());
+    	model.addAttribute("games", grepository.findAll());
+		return "consoleform";
 	}
-	
+    
 	//SAVE
-    @RequestMapping(value = "/savegame", method = RequestMethod.POST)
-    public String saveGame(Game game){
-        grepository.save(game);
-        return "redirect:gamelist";
+    @RequestMapping(value = "/saveconsole", method = RequestMethod.POST)
+    public String saveConsole(Console console){
+        crepository.save(console);
+        return "redirect:consolelist";
     }  
-
+    
+    
     //EDIT
-    @RequestMapping(value= "/editgame/{id}", method = RequestMethod.GET)
-    public String editGame(@PathVariable("id") Long gameid, Model model) {
-        model.addAttribute("editgame", grepository.findById(gameid));
+    @RequestMapping(value= "/editconsole/{id}", method = RequestMethod.GET)
+    public String editConsole(@PathVariable("id") Long consoleid, Model model) {
+        model.addAttribute("editconsole", crepository.findById(consoleid));
     	model.addAttribute("consoles", crepository.findAll());
     	model.addAttribute("serieses", srepository.findAll());
-        return "gameedit";
+        return "consoleedit";
     }
     
     //DELETE
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-    public String deleteGame(@PathVariable("id") Long gameid, Model model) {
-    	grepository.deleteById(gameid);
-        return "redirect:../gamelist";
-    }  
-
+    @RequestMapping(value = "/deleteconsole/{id}", method = RequestMethod.GET)
+    public String deleteConsole(@PathVariable("id") Long consoleid, Model model) {
+    	crepository.deleteById(consoleid);
+        return "redirect:../consolelist";
+    } 
 }

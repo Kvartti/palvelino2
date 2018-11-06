@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<link rel="stylesheet" href="../css/form.css" />
+<link rel="stylesheet" href="../css/w3.css" />
+<link rel="stylesheet" href="../css/title.css" />
+<link rel="stylesheet" href="../css/menu.css" />
+<head>
+    <title>Console Form</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<ul>
+		<li sec:authorize="hasAuthority('ADMIN')"><a href="/newgame">New Game</a></li>
+		<li sec:authorize="hasAuthority('ADMIN')"><a href="/newseries">New Series</a></li>
+		<li sec:authorize="hasAuthority('ADMIN')"><a href="/newconsole">New Console</a></li>
+		<li><a href="/gamelist">Game List</a></li>
+		<li><a href="/serieslist">Series List</a></li>
+		<li><a href="/consolelist">Console List</a></li>
+		<li class="right">
+			
+			<form action="/login" method="post" sec:authorize="isAnonymous()">
+				<input type="submit" value="Sign In" class="logbutton"/>
+			</form>
+			
+			<form th:action="@{/logout}" method="post" sec:authorize="hasAuthority('ADMIN')">
+				<input type="submit" value="Sign Out" class="logbutton"/>
+			</form>
+		</li>
+	</ul>
+		
+<div class="container">
+	<h1>Edit Series</h1>
+	<form th:object="${editseries}" th:action="@{/saveseries}" action="#" method="post">
+		<input type="hidden" th:field="${editseries.seriesid}" />
+	
+	    <div class="row">
+	    <div class="col-25">
+			<label for="name">Name:</label>
+		</div>
+		
+      	<div class="col-75">
+			<input type="text" th:field="*{seriesname}" />
+		</div>
+	</div>
+	
+		<div class="row">
+	    <div class="col-25">
+			<label for="publisher">Publisher:</label>
+		</div>
+		
+      	<div class="col-75">
+			<input type="text" th:field="*{seriesdeveloper}" />
+		</div>
+	</div>
+	<br/>
+	<div class="center">
+		<input type="submit" value="Save" class="w3-button w3-black w3-round-large"/> 
+		<input type="reset" value="Reset" class="w3-button w3-black w3-round-large"/>
+	</div>
+	</form>
+</div>
+    
+</body>
+</html>
