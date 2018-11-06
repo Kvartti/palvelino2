@@ -18,8 +18,8 @@
 		<li><a href="/gamelist">Game List</a></li>
 		<li><a href="/serieslist">Series List</a></li>
 		<li><a href="/consolelist">Console List</a></li>
-		<li class="right" sec:authorize="isAnonymous()"><a th:href="@{/login}">Log In</a></li>
-		<li class="right" sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/login}">Log Out</a></li>
+		<li class="right" sec:authorize="isAnonymous()"><a th:href="@{/login}">Sign In</a></li>
+		<li class="right" sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/login}">Sign Out</a></li>
 	</ul>
 		
 <div class="container">

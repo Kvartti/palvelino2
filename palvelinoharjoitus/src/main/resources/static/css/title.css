@@ -1,15 +1,18 @@
 	 h1{
-	 text-align: center;
-     font-weight: bold;
+	 	text-align: center;
+     	font-weight: bold;
 	 }
 	 
 	 .subtitle {
-	 text-align: center;
+	 	text-align: center;
 	 }
 	 
 	 .logout {
-	   position:absolute;
-	   top:10px;
-	   right:10px;
+	   	position:absolute;
+	   	top:10px;
+	  	right:10px;
 	  }
 	 
+	 .forbidden {
+	 	color: #808080;
+	 }

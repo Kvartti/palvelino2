@@ -50,7 +50,8 @@
 			<td th:text="${console.consolepublisher}">Publisher</td>
             <td th:text="${console.gamecount}">#0</td>
  			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/editconsole/{id}(id=${console.consoleid})}">Edit</a></td>  
- 			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/deleteconsole/{id}(id=${console.consoleid})}">Delete</a></td> 
+ 			<td sec:authorize="hasAuthority('ADMIN')" th:if="${console.gamecount == 0}"><a th:href="@{/deleteconsole/{id}(id=${console.consoleid})}">Delete</a></td>
+ 			<td sec:authorize="hasAuthority('ADMIN')" th:unless="${console.gamecount == 0}" class="forbidden">Delete</td> 
 		</tr>
 	</table>
 </div>

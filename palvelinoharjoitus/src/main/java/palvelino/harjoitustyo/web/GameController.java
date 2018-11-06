@@ -35,11 +35,14 @@ public class GameController {
 	@Autowired
 	SeriesRepository srepository;
 	
+	//Yleiset
     @RequestMapping(value="/login")
     public String login() {	
         return "login";
     }	
 	
+    
+    
 	//LIST
 	@RequestMapping(value = "/gamelist", method = RequestMethod.GET)
 	public String listGames(Model model) {
