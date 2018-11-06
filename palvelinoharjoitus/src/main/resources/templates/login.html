@@ -33,7 +33,7 @@
 	<h1>Sign In</h1>
 	
 	 	<div th:if="${param.error}" class="subtitle">
-            <font color="red">Invalid username and/or password</font><br/><br/>
+            <p th:text="#{loginerror}" class="errormessage">Invalid username and/or password</p>
         </div>
         <div th:if="${param.logout}" class="subtitle" th:text="#{signoutmessage}">
             You have been logged out.<br/><br/>

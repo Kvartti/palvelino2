@@ -29,6 +29,10 @@ label {
     padding: 10px;
 }
 
+.errormessage {
+	color: red;
+}
+
 .button {
     background-color: #4CAF50;
     border: none;
