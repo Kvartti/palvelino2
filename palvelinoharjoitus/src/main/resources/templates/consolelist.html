@@ -29,7 +29,8 @@
 	</ul>
 	
 	<h1 th:text="#{cpagetitle}">Consoles</h1>
-	<p class="subtitle" sec:authorize="isAuthenticated()">Signed in as [[${#httpServletRequest.remoteUser}]]</p>
+	<p class="subtitle" sec:authorize="isAuthenticated()" th:text="#{signedintext}">Signed in as</p>
+	<p class="subtitle" sec:authorize="isAuthenticated()" >[[${#httpServletRequest.remoteUser}]]</p>
 	
 	<div class="w3-container">
 	<table class="w3-table-all w3-card-4">

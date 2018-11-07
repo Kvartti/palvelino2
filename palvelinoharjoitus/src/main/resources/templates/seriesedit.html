@@ -25,17 +25,17 @@
 				<input type="submit" value="Sign Out" class="logbutton" th:value="#{signout}"/>
 			</form>
 		</li>
-		<li class="right"><a href="/changelang" th:text="#{lang.change}">Console List</a></li>
+		<li class="right"><a href="/changelang" th:text="#{lang.change}">Change language</a></li>
 	</ul>
 		
 <div class="container">
-	<h1>Edit Series</h1>
+	<h1 th:text="#{edits}">Edit Series</h1>
 	<form th:object="${editseries}" th:action="@{/saveseries}" action="#" method="post">
 		<input type="hidden" th:field="${editseries.seriesid}" />
 	
 	    <div class="row">
 	    <div class="col-25">
-			<label for="name">Name:</label>
+			<label for="name" th:text="#{named}">Name:</label>
 		</div>
 		
       	<div class="col-75">
@@ -45,7 +45,7 @@
 	
 		<div class="row">
 	    <div class="col-25">
-			<label for="publisher">Publisher:</label>
+			<label for="publisher" th:text="#{publisherd}">Publisher:</label>
 		</div>
 		
       	<div class="col-75">
@@ -54,8 +54,8 @@
 	</div>
 	<br/>
 	<div class="center">
-		<input type="submit" value="Save" class="w3-button w3-black w3-round-large"/> 
-		<input type="reset" value="Reset" class="w3-button w3-black w3-round-large"/>
+		<input type="submit" value="Save" class="w3-button w3-black w3-round-large" th:value="#{save}"/> 
+		<input type="reset" value="Reset" class="w3-button w3-black w3-round-large" th:value="#{reset}"/>
 	</div>
 	</form>
 </div>

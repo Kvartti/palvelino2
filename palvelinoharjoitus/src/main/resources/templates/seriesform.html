@@ -29,12 +29,12 @@
 	</ul>
 		
 <div class="container">
-	<h1>Add Series</h1>
+	<h1 th:text="#{adds}">Add Series</h1>
 	<form th:object="${series}" th:action="@{/saveseries}" action="#" method="post">
 	
 	<div class="row">
 	    <div class="col-25">
-			<label for="name">Name:</label>
+			<label for="name" th:text="#{named}">Name:</label>
 		</div>
 		
       	<div class="col-75">
@@ -44,7 +44,7 @@
 		
 	<div class="row">
 	    <div class="col-25">
-			<label for="developer">Developer:</label>
+			<label for="developer" th:text="#{developerd}">Developer:</label>
 		</div>
 		
       	<div class="col-75">
@@ -53,8 +53,8 @@
 	</div>
 	<br/>
 	<div class="center">
-		<input type="submit" value="Save" class="w3-button w3-black w3-round-large"/> 
-		<input type="reset" value="Reset" class="w3-button w3-black w3-round-large"/>
+		<input type="submit" value="Save" class="w3-button w3-black w3-round-large" th:value="#{save}"/> 
+		<input type="reset" value="Reset" class="w3-button w3-black w3-round-large" th:value="#{reset}"/>
 	</div>
 	</form>
 </div>

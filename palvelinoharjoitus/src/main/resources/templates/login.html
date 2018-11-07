@@ -31,7 +31,7 @@
 	</ul>
 		
 <div class="container">
-	<h1>Sign In</h1>
+	<h1 th:text="#{signin}">Sign In</h1>
 	
 	 	<div th:if="${param.error}" class="subtitle">
             <p th:text="#{loginerror}" class="errormessage">Invalid username and/or password</p>
