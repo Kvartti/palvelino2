@@ -10,22 +10,22 @@
 </head>
 <body>
 	<ul>
-		<li sec:authorize="hasAuthority('ADMIN')"><a href="/newgame">New Game</a></li>
-		<li sec:authorize="hasAuthority('ADMIN')"><a href="/newseries">New Series</a></li>
-		<li sec:authorize="hasAuthority('ADMIN')"><a href="/newconsole">New Console</a></li>
-		<li><a href="/gamelist">Game List</a></li>
-		<li><a href="/serieslist">Series List</a></li>
-		<li><a href="/consolelist">Console List</a></li>
+		<li sec:authorize="hasAuthority('ADMIN')"><a href="/newgame" th:text="#{newg}">New Game</a></li>
+		<li sec:authorize="hasAuthority('ADMIN')"><a href="/newseries" th:text="#{news}">New Series</a></li>
+		<li sec:authorize="hasAuthority('ADMIN')"><a href="/newconsole" th:text="#{newc}">New Console</a></li>
+		<li><a href="/gamelist" th:text="#{glist}">Game List</a></li>
+		<li><a href="/serieslist" th:text="#{slist}">Series List</a></li>
+		<li><a href="/consolelist" th:text="#{clist}">Console List</a></li>
 		<li class="right">
-			
 			<form action="/login" method="post" sec:authorize="isAnonymous()">
-				<input type="submit" value="Sign In" class="logbutton"/>
+				<input type="submit" value="Sign In" class="logbutton" th:value="#{signin}"/>
 			</form>
 			
 			<form th:action="@{/logout}" method="post" sec:authorize="hasAuthority('ADMIN')">
-				<input type="submit" value="Sign Out" class="logbutton"/>
+				<input type="submit" value="Sign Out" class="logbutton" th:value="#{signout}"/>
 			</form>
 		</li>
+		<li class="right"><a href="/changelang" th:text="#{lang.change}">Console List</a></li>
 	</ul>
 		
 <div class="container">
@@ -60,7 +60,7 @@
 		</div>
 		<div class="col-75">		
 			<input type="text" th:field="*{gameyear}" />
-             <div th:if="${#fields.hasErrors('gameyear')}"><font color="red">Only numbers</font></div>
+             <div th:if="${#fields.hasErrors('gameyear')}"><p th:text="#{numonly}" class="errormessage" /></div>
 	  	</div>
     </div>
 	

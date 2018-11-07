@@ -10,9 +10,9 @@
 </head>
 <body>
 	<ul>
-		<li sec:authorize="hasAuthority('ADMIN')"><a href="/newgame">New Game</a></li>
-		<li sec:authorize="hasAuthority('ADMIN')"><a href="/newseries">New Series</a></li>
-		<li sec:authorize="hasAuthority('ADMIN')"><a href="/newconsole">New Console</a></li>
+		<li sec:authorize="hasAuthority('ADMIN')"><a href="/newgame" th:text="#{newg}">New Game</a></li>
+		<li sec:authorize="hasAuthority('ADMIN')"><a href="/newseries" th:text="#{news}">New Series</a></li>
+		<li sec:authorize="hasAuthority('ADMIN')"><a href="/newconsole" th:text="#{newc}">New Console</a></li>
 		<li><a href="/gamelist" th:text="#{glist}">Game List</a></li>
 		<li><a href="/serieslist" th:text="#{slist}">Series List</a></li>
 		<li><a href="/consolelist" th:text="#{clist}">Console List</a></li>
@@ -25,6 +25,7 @@
 				<input type="submit" value="Sign Out" class="logbutton" th:value="#{signout}"/>
 			</form>
 		</li>
+		<li class="right"><a href="/changelang" th:text="#{lang.change}">Console List</a></li>
 	</ul>
 		
 <div class="container">

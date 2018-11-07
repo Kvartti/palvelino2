@@ -1,13 +1,27 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-<link rel="stylesheet" href="css/form.css" />
 <link rel="stylesheet" href="css/w3.css" />
 <link rel="stylesheet" href="css/title.css" />
 <link rel="stylesheet" href="css/menu.css" />
+<link rel="stylesheet" href="css/form.css" />
+
+
 <head>
-    <title>Series Form</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Game List</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#locales").change(function () {
+                var selectedOption = $('#locales').val();
+                if (selectedOption !== ''){
+                    window.location.replace('locale?lang=' + selectedOption);
+                }
+            });
+        });
+    </script>
 </head>
+
 <body>
 	<ul>
 		<li sec:authorize="hasAuthority('ADMIN')"><a href="/newgame" th:text="#{newg}">New Game</a></li>
@@ -27,37 +41,17 @@
 		</li>
 		<li class="right"><a href="/changelang" th:text="#{lang.change}">Console List</a></li>
 	</ul>
-		
+
 <div class="container">
-	<h1>Add Series</h1>
-	<form th:object="${series}" th:action="@{/saveseries}" action="#" method="post">
-	
-	<div class="row">
-	    <div class="col-25">
-			<label for="name">Name:</label>
-		</div>
-		
-      	<div class="col-75">
-			<input type="text" th:field="${series.seriesname}" />
-		</div>
-	</div>
-		
-	<div class="row">
-	    <div class="col-25">
-			<label for="developer">Developer:</label>
-		</div>
-		
-      	<div class="col-75">
-			<input type="text" th:field="${series.seriesdeveloper}" />
-		</div>
-	</div>
-	<br/>
-	<div class="center">
-		<input type="submit" value="Save" class="w3-button w3-black w3-round-large"/> 
-		<input type="reset" value="Reset" class="w3-button w3-black w3-round-large"/>
-	</div>
-	</form>
+	<h1 th:text="#{lang.change}">Change language</h1>
+
+		<select id="locales">
+		    <option value=""></option>
+		    <option value="en" th:text="#{lang.en}"></option>
+		    <option value="fi" th:text="#{lang.fi}"></option>
+		</select>
+        
 </div>
-    
+
 </body>
 </html>

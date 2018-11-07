@@ -8,17 +8,6 @@
 <head>
 <title>Game List</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $("#locales").change(function () {
-                var selectedOption = $('#locales').val();
-                if (selectedOption !== ''){
-                    window.location.replace('locale?lang=' + selectedOption);
-                }
-            });
-        });
-    </script>
 </head>
 
 <body>
@@ -38,18 +27,12 @@
 				<input type="submit" value="Sign Out" class="logbutton" th:value="#{signout}"/>
 			</form>
 		</li>
+		<li class="right"><a href="/changelang" th:text="#{lang.change}">Console List</a></li>
 	</ul>
 	
 	<h1 th:text="#{gpagetitle}">Games</h1>
 	<p class="subtitle" sec:authorize="isAuthenticated()" th:text="#{signedintext}">Signed in as</p>
 	<p class="subtitle" sec:authorize="isAuthenticated()" >[[${#httpServletRequest.remoteUser}]]</p>
-
-	<span th:text="#{lang.change}"></span>:
-		<select id="locales">
-		    <option value=""></option>
-		    <option value="en" th:text="#{lang.en}"></option>
-		    <option value="fi" th:text="#{lang.fi}"></option>
-		</select>
 	
 	<div class="w3-container">
 	<table class="w3-table-all w3-card-4">

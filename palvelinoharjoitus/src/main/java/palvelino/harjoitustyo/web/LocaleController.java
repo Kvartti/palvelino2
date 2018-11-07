@@ -23,6 +23,11 @@ public class LocaleController {
    @RequestMapping(value = "/locale", method = RequestMethod.GET)
    public String getLocalePage(Model model) {
        model.addAttribute("games", grepository.findAll());
-       return "gamelist";
+       return "changelang";
    }
+   
+   @RequestMapping(value="/changelang")
+   public String lang() {	
+       return "changelang";
+   }	
 }
