@@ -10,6 +10,6 @@ public interface GameRepository extends CrudRepository<Game, Long>{
 	
 	List<Game> findByGametitle(@Param(value="gametitle") String gametitle);
 	
-	List<Game> findByConsole(Console console);
+	List<Game> findBySeries(Series series);
 	
 }

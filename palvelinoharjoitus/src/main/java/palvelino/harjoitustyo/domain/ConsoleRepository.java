@@ -8,6 +8,4 @@ public interface ConsoleRepository extends CrudRepository<Console, Long> {
 
 	List<Console> findByConsolename(@Param(value="console") String console);
 	
-	//List<Console> findByConsoleid(@Param(value="consoleid") String consoleid);
-
 }

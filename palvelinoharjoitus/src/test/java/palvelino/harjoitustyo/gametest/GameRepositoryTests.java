@@ -18,7 +18,7 @@ import palvelino.harjoitustyo.domain.Series;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-public class GameApplicationRepositoryTests {
+public class GameRepositoryTests {
 
 	@Autowired
 	private GameRepository grepository;
@@ -28,5 +28,25 @@ public class GameApplicationRepositoryTests {
 		Game game = new Game("A Link to the Past", 1991, "Nintendo", new Console("SNES", "Nintendo"), new Series ("The Legend of Zelda", "Nintendo"));
 		grepository.save(game);
 		assertThat(game.getGameid()).isNotNull();
+	}
+	
+	@Test
+	public void deleteGame() {
+		Game game = new Game("A Link to the Past", 1991, "Nintendo", new Console("SNES", "Nintendo"), new Series ("The Legend of Zelda", "Nintendo"));
+		grepository.save(game);
+		Long id = game.getGameid();
+
+    	grepository.deleteById(id);
+    	Optional<Game> newgame = grepository.findById(id);
+    	
+    	assertThat(newgame).isEmpty();
+	}
+	
+	@Test
+	public void findByGametitle() {
+	    List<Game> games = grepository.findByGametitle("Overwatch");
+	        
+	    assertThat(games).hasSize(1);
+	    assertThat(games.get(0).getGameyear()).isEqualTo(2016);
 	}
 }
