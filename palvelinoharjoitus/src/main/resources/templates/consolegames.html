@@ -1,8 +1,8 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="css/title.css" />
-<link rel="stylesheet" href="css/menu.css" />
+<link rel="stylesheet" href="/css/w3.css">
+<link rel="stylesheet" href="/css/title.css" />
+<link rel="stylesheet" href="/css/menu.css" />
 
 <head>
 <title>Series List</title>
@@ -28,7 +28,7 @@
 		<li class="right"><a href="/changelang" th:text="#{lang.change}">Console List</a></li>
 	</ul>
 	
-	<h1 th:text="#{spagetitle}">Series</h1>	
+	<h1 th:text="${console.consolename}">Console</h1>	
 	<p class="subtitle" sec:authorize="isAuthenticated()" th:text="#{signedintext}">Signed in as</p>
 	<p class="subtitle" sec:authorize="isAuthenticated()" >[[${#httpServletRequest.remoteUser}]]</p>
 	
@@ -36,22 +36,12 @@
 	<table class="w3-table-all w3-card-4">
 		<tr>
 			<th th:text="#{name}">Name</th>
-			<th th:text="#{developer}">Developer</th>
-			<th th:text="#{games}">Games</th>
-			<th> </th>
-			<th sec:authorize="hasAuthority('ADMIN')"></th>
-			<th sec:authorize="hasAuthority('ADMIN')"></th>
+			<th th:text="#{year}">Year</th>
 		</tr>
 
-		<tr th:each="series : ${serieses}">
-			<td th:text="${series.seriesname}">Name</td>
-			<td th:text="${series.seriesdeveloper}">Developer</td>
-            <td th:text="${series.gamecount}">#0</td>
- 			<td th:if="${series.gamecount > 0}"><a th:href="@{/seriesgames/{id}(id=${series.seriesid})}" th:text="#{seegames}">See the games</a></td>
- 			<td th:unless="${series.gamecount > 0}"></td>
- 			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/editseries/{id}(id=${series.seriesid})}" th:text="#{edit}">Edit</a></td>  
- 			<td sec:authorize="hasAuthority('ADMIN')" th:if="${series.gamecount == 0}"><a th:href="@{/deleteseries/{id}(id=${series.seriesid})}" th:text="#{delete}">Delete</a></td> 
-			<td sec:authorize="hasAuthority('ADMIN')" th:unless="${series.gamecount == 0}" class="forbidden" th:text="#{delete}">Delete</td> 
+		<tr th:each="game : ${games}">
+			<td th:text="${game.gametitle}">Name</td>
+			<td th:text="${game.gameyear}">Year</td>
 		</tr>
 	</table>
 	

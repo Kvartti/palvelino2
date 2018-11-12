@@ -11,5 +11,6 @@ public interface GameRepository extends CrudRepository<Game, Long>{
 	List<Game> findByGametitle(@Param(value="gametitle") String gametitle);
 	
 	List<Game> findBySeries(Series series);
+	List<Game> findByConsole(Console console);
 	
 }

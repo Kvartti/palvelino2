@@ -46,6 +46,18 @@ public class ConsoleController {
 			return "consolelist";
 	}
 	
+    //ALL GAMES
+	@RequestMapping(value="/consolegames/{id}", method = RequestMethod.GET)
+    public String allGamesConsole(@PathVariable("id") Long consoleid, Model model) {
+		Console console = crepository.findById(consoleid).get();
+		model.addAttribute("console", console);
+		
+		List<Game> games = grepository.findByConsole(console);
+		model.addAttribute("games", games);
+		
+        return "consolegames";
+    }
+	
 	//NEW FORM
 	@RequestMapping(value = "/newconsole", method = RequestMethod.GET)
 	public String getConsoleForm(Model model) {

@@ -38,6 +38,7 @@
 			<th th:text="#{name}">Name</th>
 			<th th:text="#{publisher}">Publisher</th>
 			<th th:text="#{games}">Games</th>
+			<th> </th>
 			<th sec:authorize="hasAuthority('ADMIN')"></th>
 			<th sec:authorize="hasAuthority('ADMIN')"></th>
 		</tr>
@@ -46,6 +47,8 @@
 			<td th:text="${console.consolename}">Name</td>
 			<td th:text="${console.consolepublisher}">Publisher</td>
             <td th:text="${console.gamecount}">#0</td>
+ 			<td th:if="${console.gamecount > 0}"><a th:href="@{/consolegames/{id}(id=${console.consoleid})}" th:text="#{seegames}">See the games</a></td>
+ 			<td th:unless="${console.gamecount > 0}"></td>
  			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/editconsole/{id}(id=${console.consoleid})}" th:text="#{edit}">Edit</a></td>  
  			<td sec:authorize="hasAuthority('ADMIN')" th:if="${console.gamecount == 0}"><a th:href="@{/deleteconsole/{id}(id=${console.consoleid})}" th:text="#{delete}">Delete</a></td>
  			<td sec:authorize="hasAuthority('ADMIN')" th:unless="${console.gamecount == 0}" class="forbidden" th:text="#{delete}">Delete</td> 
