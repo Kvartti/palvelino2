@@ -41,6 +41,11 @@ public class GameController {
         return "login";
     }	
     
+    @RequestMapping(value="/")
+    public String mainPage() {	
+        return "login";
+    }	
+    
 	//LIST
 	@RequestMapping(value = "/gamelist", method = RequestMethod.GET)
 	public String listGames(Model model) {
