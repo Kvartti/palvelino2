@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link type="text/css" href="css/title.css" rel="stylesheet"/>
+<link type="text/css" href="css/menu.css" rel="stylesheet"/>
+<link type="text/css" href="css/form.css" rel="stylesheet"/>
+
+<head>
+<title>Error</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<ul>
+		<li sec:authorize="hasAuthority('ADMIN')"><a href="/newgame" th:text="#{newg}">New Game</a></li>
+		<li sec:authorize="hasAuthority('ADMIN')"><a href="/newseries" th:text="#{news}">New Series</a></li>
+		<li sec:authorize="hasAuthority('ADMIN')"><a href="/newconsole" th:text="#{newc}">New Console</a></li>
+		<li><a href="/gamelist" th:text="#{glist}">Game List</a></li>
+		<li><a href="/serieslist" th:text="#{slist}">Series List</a></li>
+		<li><a href="/consolelist" th:text="#{clist}">Console List</a></li>
+		<li class="right">
+			<form action="/login" method="post" sec:authorize="isAnonymous()">
+				<input type="submit" value="Sign In" class="logbutton" th:value="#{signin}"/>
+			</form>
+			
+			<form th:action="@{/logout}" method="post" sec:authorize="hasAuthority('ADMIN')">
+				<input type="submit" value="Sign Out" class="logbutton" th:value="#{signout}"/>
+			</form>
+		</li>
+		<li class="right"><a href="/changelang" th:text="#{lang.change}">Console List</a></li>
+	</ul>
+		
+<div class="container">
+	<h1 th:text="#{error}">Error</h1>
+	<div class="subtitle" th:text="#{errorpagemessage}">Something went wrong</div>
+</div>
+    
+</body>
+</html>

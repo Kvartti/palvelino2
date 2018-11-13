@@ -1,28 +1,19 @@
 package palvelino.harjoitustyo.web;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import palvelino.harjoitustyo.domain.Console;
 import palvelino.harjoitustyo.domain.ConsoleRepository;
 import palvelino.harjoitustyo.domain.Game;
 import palvelino.harjoitustyo.domain.GameRepository;
-import palvelino.harjoitustyo.domain.Series;
 import palvelino.harjoitustyo.domain.SeriesRepository;
 
 @Controller
@@ -35,7 +26,7 @@ public class GameController {
 	@Autowired
 	SeriesRepository srepository;
 	
-	//Yleiset
+	/** BASIC **/
     @RequestMapping(value="/login")
     public String login() {	
         return "login";
@@ -46,7 +37,7 @@ public class GameController {
         return "login";
     }	
     
-	//LIST
+	/** LIST **/
 	@RequestMapping(value = "/gamelist", method = RequestMethod.GET)
 	public String listGames(Model model) {
         model.addAttribute("games", grepository.findAll());
