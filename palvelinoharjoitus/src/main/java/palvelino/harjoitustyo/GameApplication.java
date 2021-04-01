@@ -47,7 +47,6 @@ public class GameApplication {
 			grepository.save(new Game("The Sims 4", 2014, "EA", crepository.findByConsolename("PC").get(0), srepository.findBySeriesname("The Sims").get(0)));
 			grepository.save(new Game("Dragon Age: Inquisition", 2014, "BioWare", crepository.findByConsolename("PS4").get(0), srepository.findBySeriesname("Dragon Age").get(0)));
 				
-			// admin/a, Carita/carita
 			User user1 = new User("admin", "$2a$10$evWPF7JaP0XaumZg4y0zMeZI1zUx6zLbZyFvM6IYAiRE6tBAz022u", "ADMIN");
 			User user2 = new User("Carita", "$2a$10$H0BqQ9zxMduK42ZzzkSzE.h4oGYmUJAX/67/Az3DhsqYLbFxLnt6m", "ADMIN");
 			urepository.save(user1);
